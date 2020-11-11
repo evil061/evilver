@@ -3,7 +3,7 @@ from discord.ext import commands
 import asyncio
 import random
 
-token = os.getenv("DISCORD_TOKEN")
+
 bot=commands.Bot(command_prefix = '-')
 
 @bot.event
