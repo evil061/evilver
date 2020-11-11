@@ -1,21 +1,24 @@
 import discord
-import random
-import asyncio
 from discord.ext import commands
-#from discord.ext import guild
+import asyncio
+import random
 
 token = os.getenv("DISCORD_TOKEN")
+bot=commands.Bot(command_prefix = '-')
 
-class MyClient(discord.Client):
-    async def on_ready(self):
-    	await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name ="Evil's code"))
-    	print('online')
-    	print('connected to client{}'.format(client.user.id))
-    	
+@bot.event
+async def on_ready():
+	await bot.change_presence(activity=discord.Game("https://discord.gg/DkZ9c49k2M"))
 
-    async def on_message(self, message):
+@bot.command()
+async def info(self):
+	await self.send('hello')
+	
+@bot.event
+
+async def on_message(message):
         # we do not want the bot to reply to itself
-        if message.author.id == self.user.id:
+        if message.author.id == bot.user.id:
             return
 
         if message.content.upper().startswith('VERIFY'):
@@ -28,7 +31,7 @@ class MyClient(discord.Client):
                 
 
             try:
-                guess = await self.wait_for('message', check=is_correct, timeout=40.0)
+                guess = await bot.wait_for('message', check=is_correct, timeout=40.0)
             except asyncio.TimeoutError:
                 return await message.channel.send('> {} Sorry, you took too long .type verify again '.format(message.author.mention))
                 
@@ -48,5 +51,6 @@ class MyClient(discord.Client):
                 await message.channel.send('SIMPLY TYPE VERIFY TO GET YOUR VERIFICATION CODE')
 
 
-client = MyClient()
-client.run(token)
+#bot = MyClient()
+bot.run(token)
+
