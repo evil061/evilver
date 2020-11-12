@@ -1,1 +1,1 @@
-worker: python bot/main.py
+worker: python evilver/main.py
