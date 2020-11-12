@@ -51,6 +51,6 @@ async def on_message(message):
                 await message.channel.send('SIMPLY TYPE VERIFY TO GET YOUR VERIFICATION CODE')
 
 
-#bot = MyClient()
-bot.run(token)
+
+bot.run('token')
 
